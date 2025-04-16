@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monofia Portal.APIs", "Monofia Portal.APIs\Monofia Portal.APIs.csproj", "{CC7F7E3A-010F-44FC-BA07-D20B7C988DDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menofia Portal.Core", "Menofia Portal.Core\Menofia Portal.Core.csproj", "{483CE986-9621-4AC4-92B2-3A2F586D1B7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monofia Portal.Infrastructure", "Monofia Portal.Infrastructure\Monofia Portal.Infrastructure.csproj", "{0B8953AB-42A9-4E97-B378-46C38F7CACEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monofia Portal.Services", "Monofia Portal.Services\Monofia Portal.Services.csproj", "{1FB812CD-A888-4C28-9941-98045715EE98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC7F7E3A-010F-44FC-BA07-D20B7C988DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC7F7E3A-010F-44FC-BA07-D20B7C988DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC7F7E3A-010F-44FC-BA07-D20B7C988DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC7F7E3A-010F-44FC-BA07-D20B7C988DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{483CE986-9621-4AC4-92B2-3A2F586D1B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{483CE986-9621-4AC4-92B2-3A2F586D1B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{483CE986-9621-4AC4-92B2-3A2F586D1B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{483CE986-9621-4AC4-92B2-3A2F586D1B7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B8953AB-42A9-4E97-B378-46C38F7CACEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B8953AB-42A9-4E97-B378-46C38F7CACEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B8953AB-42A9-4E97-B378-46C38F7CACEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B8953AB-42A9-4E97-B378-46C38F7CACEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FB812CD-A888-4C28-9941-98045715EE98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FB812CD-A888-4C28-9941-98045715EE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FB812CD-A888-4C28-9941-98045715EE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FB812CD-A888-4C28-9941-98045715EE98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
