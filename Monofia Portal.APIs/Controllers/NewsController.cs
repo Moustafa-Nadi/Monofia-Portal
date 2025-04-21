@@ -22,9 +22,9 @@ namespace Monofia_Portal.APIs.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<NewsDto>>> GetAll(DateTime? dateTime, int id = 1, string search = null)
+        public async Task<ActionResult<IEnumerable<NewsDto>>> GetAll(DateTime? dateTime1, DateTime? dateTime2, int id = 1, string search = null)
         {
-            var spec = new NewsWithTranslationSpecification(dateTime, id, search);
+            var spec = new NewsWithTranslationSpecification(dateTime1, dateTime2, id, search);
             var news = await _repository.GetAllAsync(spec);
             var newsDto = _mapper.Map<IEnumerable<NewsDto>>(news);
             return Ok(newsDto);
