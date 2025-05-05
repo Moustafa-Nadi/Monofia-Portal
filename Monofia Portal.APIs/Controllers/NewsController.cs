@@ -30,7 +30,7 @@ namespace Monofia_Portal.APIs.Controllers
             return Ok(newsDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("id")]
         public async Task<ActionResult<NewsDto>> GetById(int newsId, int langId = 2)
         {
             var spec = new SingleNewsWithSpecification(newsId, langId);
