@@ -1,6 +1,6 @@
 ﻿using Menofia_Portal.Core.Interfaces;
-using Menofia_Portal.Core.Specification;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Monofia_Portal.Infrastructure.Persistence.Repositories
 {
@@ -15,17 +15,46 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(ISpecification<T> specification)
+        public async Task CreateAsync(T entity)
         {
-            return await ApplyingSpecification(specification).ToListAsync();
+            await _context.AddAsync(entity);
+            await SaveAsync();
         }
 
-        public async Task<T?> GetByIdAsync(ISpecification<T> specification)
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> Criteria = null!, params Expression<Func<T, object>>[] Includes)
         {
-            return await ApplyingSpecification(specification).FirstOrDefaultAsync();
+            var query = _dbSet.AsQueryable();
+            if (Criteria is not null)
+                query = query.Where(Criteria);
+
+            Includes
+               .Aggregate(query, (currentQuery, includeQuery) => currentQuery.Include(includeQuery));
+
+            return await query.ToListAsync();
         }
 
-        private IQueryable<T> ApplyingSpecification(ISpecification<T> specification) => SpecificationEvaluator<T>
-            .GetQuery(_dbSet, specification);
+        public async Task<T?> GetByIdAsync(Expression<Func<T, bool>> Criteria = null!, params Expression<Func<T, object>>[] Includes)
+        {
+            var query = _dbSet.AsQueryable();
+
+            if (Criteria is not null)
+                query = query.Where(Criteria);
+
+            //if (!tracked)
+            //    query = query.AsNoTracking();
+            Includes
+               .Aggregate(query, (currentQuery, includeQuery) => currentQuery.Include(includeQuery));
+
+            return await query.FirstOrDefaultAsync();
+        }
+        public async Task UpdateAsync(T entity)
+        {
+            _context.Update(entity);
+            await SaveAsync();
+        }
+
+        public async Task SaveAsync() => await _context.SaveChangesAsync();
+
+
     }
 }

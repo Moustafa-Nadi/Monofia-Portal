@@ -4,21 +4,27 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Monofia_Portal.Infrastructure.Configurations
 {
-    public class RatingConfiguration : IEntityTypeConfiguration<Rating>
+    public class EvaluationConfiguration : IEntityTypeConfiguration<Evaluation>
     {
-        public void Configure(EntityTypeBuilder<Rating> builder)
+        public void Configure(EntityTypeBuilder<Evaluation> builder)
         {
             builder.ToTable("Ratings");
 
             builder.HasKey(r => r.Id);
 
+            builder.Property(r => r.Email)
+                   .IsRequired();
+
             builder.Property(r => r.Description)
                    .IsRequired()
                    .HasMaxLength(1000);
 
+            builder.Property(r => r.Rate)
+                .IsRequired();
+
             builder.HasOne(r => r.User)
-                   .WithMany(u => u.Ratings)
-                   .HasForeignKey(r => r.UserId)
+                   .WithOne(u => u.Evaluation)
+                   .HasForeignKey<Evaluation>(r => r.UserId)
                    .OnDelete(DeleteBehavior.Cascade);
         }
     }

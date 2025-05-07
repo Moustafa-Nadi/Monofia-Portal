@@ -13,8 +13,7 @@ namespace Monofia_Portal.Infrastructure.Configurations
             builder.HasKey(u => u.Id);
 
             builder.Property(u => u.Email)
-                   .IsRequired()
-                   .HasMaxLength(255);
+                   .IsRequired();
 
             builder.HasIndex(u => u.Email)
                    .IsUnique();

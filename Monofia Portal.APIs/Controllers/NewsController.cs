@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Menofia_Portal.Core.Entities;
 using Menofia_Portal.Core.Interfaces;
-using Menofia_Portal.Core.Specification;
 using Microsoft.AspNetCore.Mvc;
 using Monofia_Portal.APIs.Errors;
 using Monofia_Portal.Services.DTOs;
@@ -22,10 +21,20 @@ namespace Monofia_Portal.APIs.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<NewsDto>>> GetAll(DateTime? dateTime1, DateTime? dateTime2, int id = 1, string search = null)
+        public async Task<ActionResult<IEnumerable<NewsDto>>> GetAll(
+            DateTime? dateTime1,
+            DateTime? dateTime2,
+            int id = 1,
+            string search = null)
         {
-            var spec = new NewsWithTranslationSpecification(dateTime1, dateTime2, id, search);
-            var news = await _repository.GetAllAsync(spec);
+            var news = await _repository.GetAllAsync(
+                N => (!dateTime1.HasValue || N.Date.Date <= dateTime1.Value.Date) &&
+                    (!dateTime2.HasValue || N.Date.Date >= dateTime2.Value.Date) &&
+                    N.Translations.Any(T => T.LangId == id) &&
+                    (search == null || N.Translations.Any(T => T.Header.Contains(search))),
+                n => n.Translations,
+                n => n.Images);
+
             var newsDto = _mapper.Map<IEnumerable<NewsDto>>(news);
             return Ok(newsDto);
         }
@@ -33,8 +42,10 @@ namespace Monofia_Portal.APIs.Controllers
         [HttpGet("id")]
         public async Task<ActionResult<NewsDto>> GetById(int newsId, int langId = 2)
         {
-            var spec = new SingleNewsWithSpecification(newsId, langId);
-            var news = await _repository.GetByIdAsync(spec);
+            var news = await _repository.GetByIdAsync(
+                n => n.News_Id == newsId,
+                N => N.Translations
+                .Where(T => T.LangId == langId));
             if (news is null)
             {
                 return NotFound(new ApiResponse(404));
