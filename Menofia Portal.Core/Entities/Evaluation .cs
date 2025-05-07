@@ -1,10 +1,13 @@
 ﻿namespace Menofia_Portal.Core.Entities
 {
-    public class Complaint : BaseEntity
+    public class Evaluation : BaseEntity
     {
-        public string Description { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public double Rate { get; set; }
 
+        public string Description { get; set; }
+
+        public int UserId { get; set; }
+
+        public User User { get; set; }
     }
 }

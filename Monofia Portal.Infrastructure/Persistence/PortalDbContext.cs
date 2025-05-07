@@ -8,7 +8,11 @@ namespace Monofia_Portal.Infrastructure.Persistence
     {
         public DbSet<PortalNews> News { get; set; }
         public DbSet<NewsTranslation> NewsTranslation { get; set; }
-
+        public DbSet<ContactUs> ContactUs { get; set; }
+        public DbSet<Evaluation> Evaluations { get; set; }
+        public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<Suggestion> Suggestions { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

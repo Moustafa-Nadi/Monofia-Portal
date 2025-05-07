@@ -11,7 +11,8 @@ namespace Monofia_Portal.Infrastructure.Configurations
             builder.ToTable("Suggestions");
 
             builder.HasKey(s => s.Id);
-
+            builder.Property(r => r.Email)
+                   .IsRequired();
             builder.Property(s => s.Description)
                    .IsRequired()
                    .HasMaxLength(1000);

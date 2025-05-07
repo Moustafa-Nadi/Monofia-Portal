@@ -16,9 +16,8 @@ namespace Monofia_Portal.Infrastructure.Configurations
                    .IsRequired()
                    .HasMaxLength(255);
 
-            builder.Property(c => c.Message)
-                   .IsRequired()
-                   .HasMaxLength(1000);
+            builder.Property(c => c.PhoneNumber)
+                   .IsRequired();
 
             builder.Property(c => c.CreatedAt)
                    .IsRequired();

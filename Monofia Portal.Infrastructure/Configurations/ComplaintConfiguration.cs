@@ -11,6 +11,8 @@ namespace Monofia_Portal.Infrastructure.Configurations
             builder.ToTable("Complaints");
 
             builder.HasKey(c => c.Id);
+            builder.Property(r => r.Email)
+                   .IsRequired();
 
             builder.Property(c => c.Description)
                    .IsRequired()
