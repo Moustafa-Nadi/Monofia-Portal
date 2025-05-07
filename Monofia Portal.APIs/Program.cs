@@ -1,8 +1,10 @@
 using Commerce.APIs.Extensions;
+using Menofia_Portal.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Monofia_Portal.APIs.Extensions;
 using Monofia_Portal.APIs.Middleware;
 using Monofia_Portal.Infrastructure.Persistence;
+using MonofiaPortal.Infrastructure.Services;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerSevices();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
 
@@ -34,6 +38,8 @@ builder.Services
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+
+
 
 Log.Logger = new LoggerConfiguration()
     .Enrich
