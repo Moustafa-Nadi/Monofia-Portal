@@ -8,13 +8,19 @@ namespace Monofia_Portal.APIs.Controllers
     {
         private readonly IGenericRepository<ContactUs> _repository;
         private readonly IEmailService _emailService;
-        public ContactUsController(IGenericRepository<ContactUs> repository) { _repository = repository; }
-        public ContactUsController(IEmailService emailService)
+
+        public ContactUsController(
+            IGenericRepository<ContactUs> repository,
+            IEmailService emailService)
         {
+            _repository = repository;
             _emailService = emailService;
         }
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ContactUs>>> GetAll() => Ok(await _repository.GetAllAsync());
+        public async Task<ActionResult<IEnumerable<ContactUs>>> GetAll() =>
+            Ok(await _repository.GetAllAsync());
+
         [HttpPost("send-message")] // POST: /api/ContactUs/send-message
         public async Task<IActionResult> SendMessage([FromBody] ContactUsRequest request)
         {
@@ -23,7 +29,7 @@ namespace Monofia_Portal.APIs.Controllers
                 return BadRequest("Email and Description are required.");
             }
 
-            var adminEmail = "mohamedhosnymohamedbaza2021@gmail.com"; // Replace with the actual admin email
+            var adminEmail = "mohamedhosnymohamedbaza2021@gmail.com"; // Replace with actual admin email
             var subject = "New Contact Us Message";
             var body = $"From: {request.Email}\n\nMessage:\n{request.Description}";
 
