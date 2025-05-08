@@ -29,9 +29,9 @@ namespace Monofia_Portal.APIs.Controllers
                 return BadRequest("Email and Description are required.");
             }
 
-            var adminEmail = "mohamedhosnymohamedbaza2021@gmail.com"; // Replace with actual admin email
+            var adminEmail = "mazenkhtab11@gmail.com"; // Replace with actual admin email
             var subject = "New Contact Us Message";
-            var body = $"From: {request.Email}\n\nMessage:\n{request.Description}";
+            var body = $"From: {request.Email}\n\nMessage: {request.Description}\nRate: {request.Rate}";
 
             await _emailService.SendEmailAsync(adminEmail, subject, body);
 

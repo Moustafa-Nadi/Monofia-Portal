@@ -27,8 +27,13 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
             if (Criteria is not null)
                 query = query.Where(Criteria);
 
-            Includes
-               .Aggregate(query, (currentQuery, includeQuery) => currentQuery.Include(includeQuery));
+            if (Includes is { } && Includes.Length > 0)
+            {
+                foreach (var include in Includes)
+                {
+                    query = query.Include(include);
+                }
+            }
 
             return await query.ToListAsync();
         }
@@ -40,10 +45,13 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
             if (Criteria is not null)
                 query = query.Where(Criteria);
 
-            //if (!tracked)
-            //    query = query.AsNoTracking();
-            Includes
-               .Aggregate(query, (currentQuery, includeQuery) => currentQuery.Include(includeQuery));
+            if (Includes is { } && Includes.Length > 0)
+            {
+                foreach (var include in Includes)
+                {
+                    query = query.Include(include);
+                }
+            }
 
             return await query.FirstOrDefaultAsync();
         }
