@@ -8,8 +8,8 @@ namespace MonofiaPortal.Infrastructure.Services
 {
     public class EmailService : IEmailService
     {
-        private const string Gmail = "bazahmohamed1@gmail.com";
-        private const string AppPassword = "yrla zgxt alrh ipoy"; // will moving to json later
+        private const string Gmail = "sendere37@gmail.com"; // fake email to send emails to (admin  الجامعه يعني)
+        private const string AppPassword = "nfcd rhdx pzav nrje"; // will moving to json later
 
         public async Task SendEmailAsync(string toEmail, string subject, string body)
         {
