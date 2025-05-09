@@ -41,11 +41,6 @@ namespace Monofia_Portal.APIs.Controllers
             if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Description))
                 return BadRequest("Email and Description are required.");
 
-<<<<<<< HEAD
-            var adminEmail = "mazenkhtab11@gmail.com"; // info@menofia.edu.eg  ==> the origin link
-            var subject = "New Contact Us Message";
-            var body = $"From: {request.Email}\n\nMessage: {request.Description}\nRate: {request.Rate}";
-=======
             // Determine the email subject based on the message type
             string subject;
             switch (request.Type)
@@ -62,7 +57,6 @@ namespace Monofia_Portal.APIs.Controllers
                 default:
                     return BadRequest("Invalid message type.");
             }
->>>>>>> 0a6bbcc1e398c260df124194bc0ca331595ae730
 
             // Define admin email (this could be routed to different departments based on message type)
             var adminEmail = "mazenkhtab11@gmail.com"; // In a real scenario, route to different emails based on type
