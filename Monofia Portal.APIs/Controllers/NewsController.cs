@@ -33,8 +33,11 @@ namespace Monofia_Portal.APIs.Controllers
                 N => (!dateTime2.HasValue || N.Date.Date >= dateTime2.Value.Date) &&
                     N.Translations.Any(T => T.LangId == id) &&
                     (search == null || N.Translations.Any(T => T.Header.Contains(search))),
+<<<<<<< HEAD
                 pageSize,
                 pageNumber,
+=======
+>>>>>>> 2c1523ff65be49c33786e00026643a856181bbcd
                 n => n.Translations.Where(T => T.LangId == id),
                 n => n.Images);
 
@@ -48,7 +51,12 @@ namespace Monofia_Portal.APIs.Controllers
             var news = await _repository.GetByIdAsync(
                 n => n.News_Id == newsId,
                 N => N.Translations.Where(T => T.LangId == langId),
+<<<<<<< HEAD
                 N => N.Images.Where(i => i.Id == newsId));
+=======
+                N => N.Images);
+
+>>>>>>> 2c1523ff65be49c33786e00026643a856181bbcd
             if (news is null)
             {
                 return NotFound(new ApiResponse(404));

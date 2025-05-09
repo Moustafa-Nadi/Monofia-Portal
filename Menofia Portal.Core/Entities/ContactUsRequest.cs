@@ -10,5 +10,6 @@ namespace Menofia_Portal.Core.Entities
     {
         public string Email { get; set; }
         public string Description { get; set; }
+        public int? Rate { get; set; }
     }
 }

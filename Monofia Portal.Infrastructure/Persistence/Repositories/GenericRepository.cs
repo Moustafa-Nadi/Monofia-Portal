@@ -34,9 +34,12 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
                     query = query.Include(include);
                 }
             }
+<<<<<<< HEAD
 
             if (pageSize != 0 && pageNumber != 0)
                 query = query.Skip(pageSize * (pageNumber - 1)).Take(pageSize);
+=======
+>>>>>>> 2c1523ff65be49c33786e00026643a856181bbcd
 
             return await query.ToListAsync();
         }
@@ -48,8 +51,11 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
             if (Criteria is not null)
                 query = query.Where(Criteria);
 
+<<<<<<< HEAD
             //if (!tracked)
             //    query = query.AsNoTracking();
+=======
+>>>>>>> 2c1523ff65be49c33786e00026643a856181bbcd
             if (Includes is { } && Includes.Length > 0)
             {
                 foreach (var include in Includes)
