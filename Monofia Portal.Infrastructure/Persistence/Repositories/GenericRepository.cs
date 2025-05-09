@@ -21,14 +21,22 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
             await SaveAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> Criteria = null!, params Expression<Func<T, object>>[] Includes)
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> Criteria = null!, int pageSize = 0, int pageNumber = 0, params Expression<Func<T, object>>[] Includes)
         {
             var query = _dbSet.AsQueryable();
             if (Criteria is not null)
                 query = query.Where(Criteria);
 
-            Includes
-               .Aggregate(query, (currentQuery, includeQuery) => currentQuery.Include(includeQuery));
+            if (Includes is { } && Includes.Length > 0)
+            {
+                foreach (var include in Includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+
+            if (pageSize != 0 && pageNumber != 0)
+                query = query.Skip(pageSize * (pageNumber - 1)).Take(pageSize);
 
             return await query.ToListAsync();
         }
@@ -42,8 +50,13 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
 
             //if (!tracked)
             //    query = query.AsNoTracking();
-            Includes
-               .Aggregate(query, (currentQuery, includeQuery) => currentQuery.Include(includeQuery));
+            if (Includes is { } && Includes.Length > 0)
+            {
+                foreach (var include in Includes)
+                {
+                    query = query.Include(include);
+                }
+            }
 
             return await query.FirstOrDefaultAsync();
         }

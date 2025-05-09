@@ -1,8 +1,6 @@
 ﻿using MailKit.Net.Smtp;
-using MimeKit;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Menofia_Portal.Core.Interfaces;
+using MimeKit;
 
 namespace MonofiaPortal.Infrastructure.Services
 {
