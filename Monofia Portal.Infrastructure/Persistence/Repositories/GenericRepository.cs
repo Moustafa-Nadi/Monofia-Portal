@@ -21,7 +21,11 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
             await SaveAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> Criteria = null!, params Expression<Func<T, object>>[] Includes)
+        public async Task<IEnumerable<T>> GetAllAsync(
+            Expression<Func<T, bool>> Criteria = null!,
+            int pageSize = 0,
+            int pageNumber = 0,
+            params Expression<Func<T, object>>[] Includes)
         {
             var query = _dbSet.AsQueryable();
             if (Criteria is not null)
@@ -35,10 +39,15 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
                 }
             }
 
+
+            if (pageSize != 0 && pageNumber != 0)
+                query = query.Skip(pageSize * (pageNumber - 1)).Take(pageSize);
             return await query.ToListAsync();
         }
 
-        public async Task<T?> GetByIdAsync(Expression<Func<T, bool>> Criteria = null!, params Expression<Func<T, object>>[] Includes)
+        public async Task<T?> GetByIdAsync(
+            Expression<Func<T, bool>> Criteria = null!,
+            params Expression<Func<T, object>>[] Includes)
         {
             var query = _dbSet.AsQueryable();
 
@@ -55,6 +64,7 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
 
             return await query.FirstOrDefaultAsync();
         }
+
         public async Task UpdateAsync(T entity)
         {
             _context.Update(entity);
@@ -62,7 +72,5 @@ namespace Monofia_Portal.Infrastructure.Persistence.Repositories
         }
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();
-
-
     }
 }

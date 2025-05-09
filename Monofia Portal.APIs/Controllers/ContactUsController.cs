@@ -46,7 +46,7 @@ namespace Monofia_Portal.APIs.Controllers
             if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Description))
                 return BadRequest("Email and Description are required.");
 
-            var adminEmail = "mazenkhtab11@gmail.com"; // Replace with actual admin email
+            var adminEmail = "mazenkhtab11@gmail.com"; // info@menofia.edu.eg  ==> the origin link
             var subject = "New Contact Us Message";
             var body = $"From: {request.Email}\n\nMessage: {request.Description}\nRate: {request.Rate}";
 
